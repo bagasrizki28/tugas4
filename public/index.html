@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      .div {
+        display: flex;
+        flex-direction: column;
+        gap: 80px;
+      }
+      th,
+      td {
+        border: 1px solid;
+        text-align: center;
+        padding: 10px;
+      }
+      table {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-collapse: collapse;
+      }
+      header h1 {
+        text-align: left;
+      }
+      footer p {
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="div">
+      <header>
+        <h1>TUGAS 4 NODE.JS BAGAS RIZKY</h1>
+      </header>
+      <main>
+        <table>
+          <tr>
+            <th>NO</th>
+            <th>NAMA</th>
+            <th>DIAMETER</th>
+            <th>GRAVITASI</th>
+            <th>SUHU</th>
+            <th>JUMLAH SATELIT</th>
+          </tr>
+          <tbody></tbody>
+        </table>
+      </main>
+      <footer>
+        <p>©2023. Bagas Rizky</p>
+      </footer>
+    </div>
+    <script>
+      fetch("/api/getdata")
+        .then((response) => response.json())
+        .then((data) => {
+          const tbody = document.querySelector("tbody");
+          data.forEach((x) => {
+            const tr = document.createElement("tr");
+
+            const tdid = document.createElement("td");
+            tdid.textContent = `${x.id}`;
+            tr.appendChild(tdid);
+
+            const tdnama = document.createElement("td");
+            tdnama.textContent = x.nama;
+            tr.appendChild(tdnama);
+
+            const tddiameter = document.createElement("td");
+            tddiameter.textContent = x.diameter;
+            tr.appendChild(tddiameter);
+
+            const tdgravitasi = document.createElement("td");
+            tdgravitasi.textContent = x.gravitasi;
+            tr.appendChild(tdgravitasi);
+
+            const tdsuhu = document.createElement("td");
+            tdsuhu.textContent = x.suhu;
+            tr.appendChild(tdsuhu);
+
+            const tdjumlah_satelit = document.createElement("td");
+            tdjumlah_satelit.textContent = x.jumlah_satelit;
+            tr.appendChild(tdjumlah_satelit);
+
+            tbody.appendChild(tr);
+          });
+        });
+    </script>
+  </body>
+</html>
